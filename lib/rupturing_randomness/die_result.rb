@@ -9,8 +9,7 @@ class DieResult
   # Used to adjust the likelihood AND value of this result
   # when it comes at the end of an explosion
   def adjust scalar
-    @value += scalar
-    @denominator *= scalar
+    DieResult.new(@value + scalar, @denominator * scalar)
   end
 
   def == other
