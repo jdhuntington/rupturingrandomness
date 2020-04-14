@@ -1,9 +1,10 @@
 class DieResult
-  attr_reader :value, :denominator
+  attr_reader :value, :denominator, :numerator
 
-  def initialize value, denominator
+  def initialize value, denominator, numerator = 1
     @value = value
     @denominator = denominator
+    @numerator = numerator
   end
 
   # Used to adjust the likelihood AND value of this result
@@ -12,7 +13,14 @@ class DieResult
     DieResult.new(@value + scalar, @denominator * scalar)
   end
 
+  def scale new_denominator
+    @numerator *= (new_denominator / @denominator)
+    @denominator = new_denominator
+  end
+
   def == other
-    value == other.value && denominator == other.denominator
+    value == other.value &&
+      denominator == other.denominator &&
+      numerator == other.numerator
   end
 end
