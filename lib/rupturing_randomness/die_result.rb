@@ -36,4 +36,9 @@ class DieResult
       denominator == other.denominator &&
       numerator == other.numerator
   end
+
+  def to_s
+    scaling_factor = numerator.gcd(denominator)
+    "[#{value}, #{numerator / scaling_factor}/#{denominator / scaling_factor}]"
+  end
 end
