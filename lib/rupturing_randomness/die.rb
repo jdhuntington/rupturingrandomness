@@ -5,6 +5,6 @@ class Die
   end
 
   def possibilities
-    (1..@sides).to_a
+    (1..@sides).map {|x| DieResult.new x, @sides}
   end
 end
