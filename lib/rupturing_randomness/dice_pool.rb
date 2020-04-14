@@ -4,10 +4,11 @@ class DicePool
   end
 
   def possibilities
-    @dice.map(&:possibilities).map do |die_possibilities|
-      denominator = die_possibilities.inject(1) { |acc, p| acc.lcm p.denominator }
-      
+    @dice.map(&:possibilities).reduce do |acc, die_possibilities|
+      values = die_possibilities.map { |possibility| acc.map { |acc_val| acc_val + possibility }}.flatten
+      values.group_by(&:value).map do |_, vals|
+        vals.reduce { |summed, val| summed.merge(val) }
+      end.flatten
     end
-    [DieResult.new(2, 4), DieResult.new(3, 4), DieResult.new(3, 4), DieResult.new(4, 4)]
   end
 end
