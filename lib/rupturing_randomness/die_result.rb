@@ -41,4 +41,15 @@ class DieResult
     scaling_factor = numerator.gcd(denominator)
     "[#{value}, #{numerator / scaling_factor}/#{denominator / scaling_factor}]"
   end
+
+  def pretty_print
+    scaling_factor = numerator.gcd(denominator)
+    count = (80 * numerator.to_f / denominator.to_f).to_i
+    sprintf "%4d (%4d/%5d) [%-80s]",
+            value,
+            numerator / scaling_factor,
+            denominator / scaling_factor,
+            "*" * count
+    
+  end
 end

@@ -18,6 +18,9 @@ pool = DicePool.new(*ARGV.map { |i| Die.new i.to_i, options[:explosions] })
 possibilities = pool.possibilities
 
 if options[:pretty]
+  possibilities.each do |p|
+    puts p.pretty_print
+  end
 else
   puts possibilities.map(&:to_s).join(', ')
 end
